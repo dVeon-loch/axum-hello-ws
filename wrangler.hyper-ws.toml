@@ -1,0 +1,26 @@
+name = "hyper-ws"
+main = "worker/index.ts"
+compatibility_date = "2026-03-20"
+compatibility_flags = ["nodejs_compat"]
+
+[durable_objects]
+bindings = [{ name = "CONTAINER", class_name = "AxumHelloContainer" }]
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["AxumHelloContainer"]
+
+[[containers]]
+name = "hyper-ws"
+class_name = "AxumHelloContainer"
+image = "./Dockerfile.hyper-ws"
+max_instances = 1
+
+[observability]
+enabled = true
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+persist = true
+invocation_logs = true
